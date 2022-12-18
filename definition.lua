@@ -15,7 +15,8 @@ function M.def_position(buf)
     or not results_lsp[1].result[1]
     or vim.tbl_isempty(results_lsp)
   then
-    print 'No results from textDocument/definition'
+    -- Test by print
+    -- print 'No results from textDocument/definition'
     return
   end
 
