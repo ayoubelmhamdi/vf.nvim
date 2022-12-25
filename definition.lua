@@ -1,3 +1,5 @@
+local ts = require 'gg.treesitter'
+
 local M = {}
 
 function M.def_position(buf)
@@ -43,6 +45,38 @@ function M.node_at_pos(start_line, start_col, buf)
   local node = root:descendant_for_range(start_line, start_col, start_line, start_col)
 
   return node
+end
+
+function A()
+  print 'a'
+end
+
+local B = function()
+  print 'a'
+end
+
+C = function()
+  print 'a'
+end
+
+function M.tsdef_position(ft, root, buf)
+  -- if lua
+  local txt_query = [[
+    (assignment_statement
+      (variable_list) @var
+      (expression_list
+        value: (function_definition) @a)) @function_declaration
+  ]]
+
+  local query = ts.tsquery(ft, txt_query)
+  print(vim.inspect(query))
+
+  for _, captures in query:iter_matches(root, buf) do
+    print(vim.inspect(captures))
+  end
+
+  -- return
+  -- return node
 end
 
 return M

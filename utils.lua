@@ -49,7 +49,7 @@ function M.create_split(filetype)
   -- For better UX we will turn off line wrap and turn on current line highlight.
   vim.api.nvim_win_set_option(win, 'wrap', false)
   vim.api.nvim_win_set_option(win, 'cursorline', true)
-  vim.api.nvim_buf_set_option(buf, "filetype", filetype )
+  vim.api.nvim_buf_set_option(buf, 'filetype', filetype)
 
   if win and vim.api.nvim_win_is_valid(start_win) then
     vim.api.nvim_set_current_win(start_win)
