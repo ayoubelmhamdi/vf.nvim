@@ -11,9 +11,11 @@ M.view_function = function()
     local filetype = vim.o.ft
     M.bufnr_output = util.create_split(filetype)
   end
+
   if M.bufnr_output == 0 then
     return
   end
+
   if not vim.lsp.buf.server_ready() then
     util.wipe_buf(M.bufnr_output)
     util.print_lines(M.bufnr_output, { 'Lsp Not ready' })
@@ -24,10 +26,12 @@ M.view_function = function()
   if not line or not col then
     return
   end
+
   local node = def.node_at_pos(line, col)
   if not node then
     return
   end
+
   local lines = util.node_to_lines(node)
 
   util.wipe_buf(M.bufnr_output)
