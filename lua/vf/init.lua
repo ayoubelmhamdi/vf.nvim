@@ -1,5 +1,5 @@
-local util = require("gg.utils")
-local def = require("gg.definition")
+local util = require("vf.utils")
+local def = require("vf.definition")
 
 local bufnr_output = 5
 local bufnr = 0
