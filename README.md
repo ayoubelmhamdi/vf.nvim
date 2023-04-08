@@ -14,24 +14,6 @@ return {
     vim.keymap.set('n', '<space>e', function()
       require('vf').view_function()
     end, {})
-    --
-    -- Create an autocommand group
-    local group = vim.api.nvim_create_augroup('delete_no_name_buffers', { clear = true })
-
-    -- Create an autocommand to delete buffers with the name '[No Name]'
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNew' }, {
-      pattern = '*',
-      group = group,
-      callback = function()
-        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-          local bufname = vim.api.nvim_buf_get_name(bufnr)
-          if bufname == '' then
-            vim.bo[bufnr].bufhidden = 'delete'
-          end
-        end
-      end,
-    })
-  end,
 }
 ```
 
