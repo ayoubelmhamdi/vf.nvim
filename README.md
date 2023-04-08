@@ -1,19 +1,19 @@
 # Testing
-
+`vnew` should open `vsplit` with `bufnr=5`
+```vim
+:vnew
+```
 ```lua
 return {
   'ayoubelmhamdi/vf.nvim',
   config = function()
-    vim.keymap.set('n', '<space>s', function()
-      -- package.loaded.vf = nil
-      -- vim.cmd 'w'
-      R 'gg'
-      require('vf').view_function()
-    end, {})
-
-    vim.keymap.set('n', '<space>e', function()
-      require('vf').view_function()
-    end, {})
+    vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+      pattern = { '*.rs', '*.lua' },
+      callback = function()
+        vim.cmd [[silent! lua require("vf").view_function()]]
+      end,
+    })
+  end,
 }
 ```
 
