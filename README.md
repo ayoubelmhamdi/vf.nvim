@@ -20,10 +20,29 @@ return {
 ### Inspect userdata :
 `type`: is `userdata`
 ```lua
-P(vim.inspect(getmetatable(userdata))) => <1>{}
-P(getmetatable(userdata))              => ""
-P(userdata.iddd)                       ==> 1
-P(userdata:iddd())                     ==> 1
+P = function(v)
+    print(type(v))
+    local v_type = type(v)
+    if v_type == 'number' or v_type == 'string' or v_type == 'boolean' then
+        print(v)
+    elseif v_type == 'function' then
+        print(vim.inspect(v))
+    else -- v_type == 'userdata'
+        print(vim.inspect(getmetatable(v)))
+    end
+end
+local node = vim.treesitter.get_parser():parse()[1]:root()::descendant_for_range(1,1)
+```
+
+```lua
+<function 1>: userdata>
+<function 2>: function>
+<function 3>: boolean>
+
+P(node userdata)                       => <1>{foo=<function 1>,bar=<function 2>,baz=<function 3>}
+P(node:foo())                          => "Heloo word"
+P(node -> bar)                        ==> ??? maybe  node.bar or node:baz
+P(node -> baz)                        ==> ??? maybe  node.baz or node:baz
 ```
 ### node
 - `type`: `function_definition`/`identifire`...
