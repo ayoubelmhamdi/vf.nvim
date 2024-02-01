@@ -39,8 +39,8 @@ local node = vim.treesitter.get_parser():parse()[1]:root()::descendant_for_range
 <function 2>: function>
 <function 3>: boolean>
 
-P(node userdata)                       => <1>{foo=<function 1>,bar=<function 2>,baz=<function 3>}
-P(node:foo())                          => "Heloo word"
+P(node userdata)                      ==> <1>{foo=<function 1>,bar=<function 2>,baz=<function 3>}
+P(node:foo())                         ==> "Heloo word"
 P(node -> bar)                        ==> ??? maybe  node.bar or node:baz
 P(node -> baz)                        ==> ??? maybe  node.baz or node:baz
 ```
