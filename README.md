@@ -19,7 +19,7 @@ return {
 
 ### Inspect userdata :
 `type`: is `userdata`
-```
+```lua
 P(vim.inspect(getmetatable(userdata))) => <1>{}
 P(getmetatable(userdata))              => ""
 P(userdata.iddd)                       ==> 1
